@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="PureStyler.css">
+    <script src="script.js"></script>
+    <link rel="icon" href="c:\Users\USER\Downloads\p-letter-logo-icon-for-business-and-company-vector.png" type="image/png">
+    <body>
+    <h1 id="mensaje">Pure<span>S</span>tyler</h1>
+    <script src="carrito.js"></script>
+    <script>
+        // Versión moderna
+        document.getElementById("mensaje").innerHTML
+        alert("Quieres entrar");
+    </script>
+      <header>
+        <title>PureStyler</title>
+          <div class="top-bar">
+             <marquee> Envío gratuito en pedidos superiores a $10,000</marquee>
+          </div>
+          <div class="logo-container">
+              <a href="#" class="logo">Pure<span>S</span>tyler</a>
+              <div class="search-container">
+              </div>
+          </div>
+          <nav>
+              <ul class="menu">
+                  <li><a href="../proyectos de tienda propia y trabajos ARJ/PureStyler.html">Inicio</a></li>
+                  <li><a href="../proyectos de tienda propia y trabajos ARJ/ropa.html">Ropa</a></li>
+                  <li><a href="../proyectos de tienda propia y trabajos ARJ/accesorios.html">Accesorios</a></li>
+                  <li><a href="../proyectos de tienda propia y trabajos ARJ/ACERCA DE NOSOTROS.html">Acerca de Nosotros</a></li>
+                <li><a href="../proyectos de tienda propia y trabajos ARJ/Acceder.html">Acceder</a></li>
+                <li><a href="../proyectos de tienda propia y trabajos ARJ/carrito.html">🛒</a></li>
+              </ul>
+          </nav>
+      </header>
+  
+<section id="inicio" class="hero">
+    <div class="hero-content">
+        <h1>Descubre Tu Estilo Único</h1>
+        <p>PureStyler te ofrece las últimas tendencias en moda con la mejor calidad y precios exclusivos.</p>
+        <a href="#ropa" class="btn">Ver Colección</a>
+    </div>
+</section>
+
+ <section id="ropa" class="featured-products">
+        <h2 class="section-title">Prendas Destacadas</h2>
+        <div class="product-grid">
+            <div class="product-card" onclick="openModal('conjunto-primavera')">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/15/35/53/153553bd085c6cd0537765c13a4c083b.jpg" alt="Conjunto de Primavera">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Conjunto de Primavera</h3>
+                    <p class="product-price">$1,000</p>
+                </div>
+            </div>
+            <div class="product-card" onclick="openModal('chaqueta-denim')">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/83/c4/e9/83c4e990fd6490cd5affd17516037ecb.jpg" alt="Chaqueta Denim">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Chaqueta Denim Premium</h3>
+                    <p class="product-price">$2,000</p>
+                </div>
+            </div>
+            <div class="product-card" onclick="openModal('pantalones-cargo')">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/33/2d/aa/332daa4a75b98bde74ab0a7b02143fda.jpg" alt="Pantalón Lino">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Pantalones cargo</h3>
+                    <p class="product-price">$600</p>
+                </div>
+            </div>
+            <div class="product-card" onclick="openModal('conjunto-samurai')">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/e5/7f/bb/e57fbb8062395096a7c5fcc93a9c7e6c.jpg" alt="Blusa Seda">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Conjunto de entrenamiento estilo samurái</h3>
+                    <p class="product-price">$5,000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="accesorios" class="category-section">
+        <h2 class="section-title">Accesorios</h2>
+        <div class="product-grid">
+            <div class="product-card" onclick="openModal('anillo-plata')">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/0f/e1/a1/0fe1a111fe3c05b379fedcab04abb602.jpg" alt="Bolso Elegante">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Anillo de plata</h3>
+                    <p class="product-price">$1,000</p>
+                </div>
+            </div>
+            <div class="product-card" onclick="openModal('gafas-vintage')">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/0e/fc/26/0efc26283ee88a1ffa17698df8072585.jpg" alt="Gafas de Sol">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Gafas de Sol Vintage</h3>
+                    <p class="product-price">$700</p>
+                </div>
+            </div>
+            <div class="product-card" onclick="openModal('pulsera-plata')">
+                <div class="product-image">
+                    <img src="https://img.fantaskycdn.com/ac865c49419882652d2ae28670f9fd9e_750x.jpeg" alt="Pulsera Plata">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Pulsera de Plata Artesanal</h3>
+                    <p class="product-price">$2,000</p>
+                </div>
+            </div>
+            <div class="product-card" onclick="openModal('cadena-plata')">
+                <div class="product-image">
+                    <img src="https://img.fantaskycdn.com/11e1ce8a54917074179f3b5b189fc0bb_750x.jpeg" alt="Sombrero">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Cadena de plata</h3>
+                    <p class="product-price">$2,000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products">
+        <h2 class="section-title">Colección Clásica</h2>
+        <div class="product-grid">
+            <div class="product-card" onclick="openModal('traje-clasico')">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/4d/e1/0f/4de10fbabf0f4888ae4493c7c48a908f.jpg" alt="Traje Clásico">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Traje Clásico Negro</h3>
+                    <p class="product-price">$3,500</p>
+                </div>
+            </div>
+            <div class="product-card" onclick="openModal('sapatos')">
+                <div class="product-image">
+                    <img src="https://img.fantaskycdn.com/efbcb6f2d73fe1463d415e4eedd21c3c_540x.jpeg" alt="Vestido Negro">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Sapatos</h3>
+                    <p class="product-price">$1,000</p>
+                </div>
+            </div>
+            <div class="product-card" onclick="openModal('corbata')">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/93/74/21/9374219d6bd05337dae3fb83f34539f3.jpg" alt="Camisa Blanca">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Corbata</h3>
+                    <p class="product-price">$200</p>
+                </div>
+            </div>
+            <div class="product-card" onclick="openModal('monos')">
+                <div class="product-image">
+                    <img src="https://i.pinimg.com/736x/46/31/cc/4631cc36e740168de768a713dec6f4d9.jpg" alt="Jeans Clásicos">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-name">Moños</h3>
+                    <p class="product-price">$100</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Información del Producto</h2>
+            <div class="modal-body">
+                <div>
+                    <img id="modal-image" src="" alt="" class="modal-image">
+                </div>
+                <div>
+                    <h3 id="modal-title" class="modal-title"></h3>
+                    <div id="modal-price" class="modal-price"></div>
+                    <p id="modal-description" class="modal-description"></p>
+                    <button class="btn-buy" onclick="buyProduct()">Comprar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Contenido demo -->
+    <div class="demo-content">
+        <h1>PureStyler Website</h1>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>PureStyler</h3>
+                <p>Tu destino para la moda contemporánea, clásica y atemporal.</p>
+                <div class="social-links">
+                    <a href="https://mail.google.com/mail/u/0/#inbox" title="Gmail">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h1.909L12 10.273l8.455-6.452h1.909c.904 0 1.636.732 1.636 1.636z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://www.facebook.com/profile.php?id=61575556292584" title="Facebook">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://www.instagram.com/purestylerrd/" title="Instagram">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                    
+                    <a href="https://www.youtube.com/@PureStylerRD" title="YouTube">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contacto</h3>
+                <ul>
+                    <li>Email: info@purestyler.com</li>
+                     <li>Numero: 809-405-6317</li>
+                </ul>
+            </div>
+        </div>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeBOkUmoLL6T7EOytBbx_YxHE6sU4qHsik6A&s" alt="">
+
+        <div class="copyright">
+            <marquee>© 2025 PureStyler.</marquee>
+        </div>
+    </footer>

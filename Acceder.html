@@ -1,0 +1,54 @@
+    <link rel="stylesheet" href="Acceder.css">
+     <script src="Acceder.js"></script>
+    <div class="container">
+        <!-- Formulario de Login/Registro -->
+        <div id="authForm" class="form-container">
+           <button><nav> <li><a href="../proyectos de tienda propia y trabajos ARJ/PureStyler.html">Inicio</a></li></nav></button>
+            <h2 id="formTitle">Iniciar Sesión</h2>
+            
+            <div id="message"></div>
+            
+            <form id="loginForm">
+                <div class="form-group" id="nameGroup" style="display: none;">
+                    <label for="name">Nombre completo:</label>
+                    <input type="text" id="name" name="name">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Contraseña:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn" id="submitBtn">Iniciar Sesión</button>
+            </form>
+            
+            <p>
+                <span id="toggleText">¿No tienes cuenta?</span>
+                <a href="#" class="toggle-link" id="toggleLink">Regístrate aquí</a>
+            </p>
+        </div>
+        
+        <!-- Dashboard del usuario -->
+        <div id="dashboard" class="dashboard">
+            <h2>¡Bienvenido!</h2>
+            
+            <div class="user-info">
+                <h3 id="userName"></h3>
+                <p id="userEmail"></p>
+                <p><strong>Último acceso:</strong> <span id="lastLogin"></span></p>
+            </div>
+            
+            <button class="btn logout-btn" id="logoutBtn">Cerrar Sesión</button>
+            
+            <div class="users-list">
+                <h3>Usuarios Registrados:</h3>
+                <div id="usersList"></div>
+            </div>
+        </div>
+    </div>
+     <script src="Acceder.css"></script>

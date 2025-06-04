@@ -1,0 +1,206 @@
+ <link rel="stylesheet" href="ropa.css">
+    <script src="ropa.js"></script>
+<body>
+    <header class="header">
+        <div class="container">
+            <button><nav> <li><a href="../proyectos de tienda propia y trabajos ARJ/PureStyler.html">Inicio</a></li></nav></button>
+            <h1>PureStyler te ofrece Moda & Estilo</h1>
+            <p>Tu destino para toda ocasión</p>
+        </div>
+    </header>
+
+ <h1 class="main-title">🛍️ Tienda de Ropa</h1>
+
+    <!-- Ropa Clásica -->
+    <div class="container">
+        <h1>👔 Ropa Clásica</h1>
+        
+        <div class="products-grid">
+            <!-- Producto 1 -->
+            <div class="product-card" onclick="openModal('classic1')">
+                <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/9b/7c/20/9b7c20a0a601903d943362bd57548668.jpg')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Camisa Blanca</h3>
+                    <div class="product-price">$299</div>
+                    <p class="product-description">Camisa clásica de algodón premium, perfecta para cualquier ocasión formal.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card" onclick="openModal('classic2')">
+                <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/56/72/99/567299d68b9a55622117e68fffbeb7b5.jpg')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Pantalón Negro</h3>
+                    <div class="product-price">$189</div>
+                    <p class="product-description">Pantalón de vestir en color negro, corte clásico y elegante.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card" onclick="openModal('classic3')">
+                <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/3f/bc/b1/3fbcb14dbce684f21e50be6cb83bcde1.jpg')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Blazer de Lana</h3>
+                    <div class="product-price">$429</div>
+                    <p class="product-description">Blazer elegante de lana merino, ideal para eventos formales.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ropa Deportiva -->
+    <div class="container">
+        <h1>🏃‍♂️ Ropa Deportiva</h1>
+        
+        <div class="products-grid">
+            <!-- Producto 1 -->
+            <div class="product-card" onclick="openModal('sport1')">
+                <div class="product-image" style="background-image: url('https://i.pinimg.com/736x/a7/38/1e/a7381ebd512410563c72a817c2764e0b.jpg')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Camiseta Deportiva</h3>
+                    <div class="product-price">$790</div>
+                    <p class="product-description">Camiseta técnica con tecnología de absorción de humedad.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card" onclick="openModal('sport2')">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=250&fit=crop')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Zapatillas Running</h3>
+                    <div class="product-price">$189</div>
+                    <p class="product-description">Zapatillas deportivas de última generación para corredores.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card" onclick="openModal('sport3')">
+                <div class="product-image" style="background-image: url('https://i5.walmartimages.com.mx/mg/gm/1p/images/product-images/img_large/00750132599893l.jpg?odnHeight=612&odnWidth=612&odnBg=FFFFFF')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Shorts Deportivos</h3>
+                    <div class="product-price">$350</div>
+                    <p class="product-description">Shorts cómodos y transpirables para entrenamientos intensos.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ropa Casual -->
+    <div class="container">
+        <h1>👕 Ropa Casual</h1>
+        
+        <div class="products-grid">
+            <!-- Producto 1 -->
+            <div class="product-card" onclick="openModal('casual1')">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=250&fit=crop')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Camiseta Casual</h3>
+                    <div class="product-price">$450</div>
+                    <p class="product-description">Camiseta de algodón 100% para uso diario, suave y cómoda.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card" onclick="openModal('casual2')">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1542272604-787c3835535d?w=400&h=250&fit=crop')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Jeans Clásicos</h3>
+                    <div class="product-price">$129</div>
+                    <p class="product-description">Jeans de mezclilla resistente con corte moderno y cómodo.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card" onclick="openModal('casual3')">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=250&fit=crop')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Sudadera Casual</h3>
+                    <div class="product-price">$300</div>
+                    <p class="product-description">Sudadera con capucha, perfecta para días frescos y relajados.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ropa Formal -->
+    <div class="container">
+        <h1>🤵 Ropa Formal</h1>
+        
+        <div class="products-grid">
+            <!-- Producto 1 -->
+            <div class="product-card" onclick="openModal('formal1')">
+                <div class="product-image" style="background-image: url('https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=400&h=250&fit=crop')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Traje Ejecutivo</h3>
+                    <div class="product-price">$599</div>
+                    <p class="product-description">Traje completo de corte italiano, ideal para ejecutivos.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 2 -->
+            <div class="product-card" onclick="openModal('formal2')">
+                <div class="product-image" style="background-image: url('https://corbatasygemelos.es/1768-medium_default/corbatas-seda-azul-marino-rayas.jpg')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Corbata de Seda</h3>
+                    <div class="product-price">$200</div>
+                    <p class="product-description">Corbata elegante de seda italiana con diseño sofisticado.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+
+            <!-- Producto 3 -->
+            <div class="product-card" onclick="openModal('formal3')">
+                <div class="product-image" style="background-image: url('https://www.corbataslester.com/magazine/wp-content/uploads/2018/01/oxford.jpg')"></div>
+                <div class="product-info">
+                    <h3 class="product-title">Zapatos Oxford</h3>
+                    <div class="product-price">$289</div>
+                    <p class="product-description">Zapatos Oxford de cuero genuino, perfectos para ocasiones formales.</p>
+                    <button class="view-details">Ver detalles</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle">Título del Producto</h2>
+                <button class="close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image" id="modalImage"></div>
+                <div class="modal-details">
+                    <div class="modal-price" id="modalPrice">$0</div>
+                    <p class="modal-description" id="modalDescription">Descripción del producto...</p>
+                    <div class="product-specs" id="modalSpecs">
+                        <!-- Especificaciones se cargan dinámicamente -->
+                    </div>
+                    <div class="modal-actions">
+                        <button class="btn btn-primary">Comprar Ahora</button>
+                        <button class="btn btn-secondary">Añadir al Carrito</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Moda & Estilo. Todos los derechos reservados.</p>
+            <p>La mejor moda para cada ocasión de tu vida</p>
+        </div>
+    </footer>
+</body>
+
+

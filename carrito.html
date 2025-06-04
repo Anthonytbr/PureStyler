@@ -1,0 +1,50 @@
+
+  <title>Tienda de Ropa</title>
+  <link rel="stylesheet" href="carrito.css">
+<script src="carrito.js"></script>
+ <button><nav> <li><a href="../proyectos de tienda propia y trabajos ARJ/PureStyler.html">Inicio</a></li></nav></button>
+</head>
+<body>
+  <h1>Tienda de Ropa</h1>
+
+  <div class="container">
+        <h1>🛒 Carrito de Compras</h1>
+        
+        <!-- Lista de Productos -->
+        <div class="productos">
+            <div class="producto" data-id="1">
+                <img src="https://vasari.vteximg.com.br/arquivos/ids/215218-500-500/MZC175912-BL-30.jpg?v=638162380611400000" alt="Zapatos">
+                <h3>Zapatos Deportivos</h3>
+                <p>$50.00</p>
+                <button class="agregar">Agregar</button>
+            </div>
+            <div class="producto" data-id="2">
+                <img src="https://i.ebayimg.com/images/g/VecAAOSwuCdi5AcH/s-l1200.jpg" alt="Camisa">
+                <h3>Camisa Elegante</h3>
+                <p>$30.00</p>
+                <button class="agregar">Agregar</button>
+            </div>
+            <div class="producto" data-id="3">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLACITqJ9clJNFyOGFF7dptLaNAJpjSV7r3g&s" alt="Pantalón">
+                <h3>Pantalón Jeans</h3>
+                <p>$40.00</p>
+                <button class="agregar">Agregar</button>
+            </div>
+        </div>
+
+        <!-- Carrito -->
+        <div class="carrito">
+            <h2>Tu Carrito</h2>
+            <div class="items-carrito" id="items-carrito">
+                <!-- Aquí se agregan dinámicamente los productos -->
+            </div>
+            <div class="total">
+                <p>Total: <span id="total">$0.00</span></p>
+                <button id="pagar">Pagar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- guardar elementos del carrito en memoria con javascrip -->
+    <!-- cambiar los elementos del carrito a modo dinamico, buscarlos en memoria -->
+     
