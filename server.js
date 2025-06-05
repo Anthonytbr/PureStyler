@@ -1,6 +1,6 @@
-// server.js
+// server.js - Configurado para SQL Server
 const express = require('express');
-const mysql = require('mysql2/promise');
+const sql = require('mssql');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
@@ -16,30 +16,53 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Configuración de la base de datos
+// Configuración de SQL Server
 const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
+  user: process.env.DB_USER || 'sa',
+  password: process.env.DB_PASSWORD,
+  server: process.env.DB_SERVER || 'localhost',
   database: process.env.DB_NAME || 'login_system',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+  options: {
+    encrypt: process.env.DB_ENCRYPT === 'true', // Para Azure SQL
+    trustServerCertificate: true, // Para desarrollo local
+    enableArithAbort: true,
+    instanceName: process.env.DB_INSTANCE || undefined, // Ej: 'SQLEXPRESS'
+  },
+  port: parseInt(process.env.DB_PORT) || 1433,
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000
+  },
+  connectionTimeout: 60000,
+  requestTimeout: 60000
 };
 
 // Pool de conexiones
-const pool = mysql.createPool(dbConfig);
+let poolPromise;
 
-// Función para verificar conexión a la BD
-async function testConnection() {
+// Función para inicializar la conexión
+async function initializeDatabase() {
   try {
-    const connection = await pool.getConnection();
-    console.log('✅ Conexión a MySQL establecida correctamente');
-    connection.release();
+    poolPromise = new sql.ConnectionPool(dbConfig);
+    await poolPromise.connect();
+    console.log('✅ Conexión a SQL Server establecida correctamente');
+    console.log(`📊 Base de datos: ${dbConfig.database}`);
+    console.log(`🖥️  Servidor: ${dbConfig.server}${dbConfig.options.instanceName ? '\\' + dbConfig.options.instanceName : ''}`);
+    return poolPromise;
   } catch (error) {
-    console.error('❌ Error conectando a MySQL:', error.message);
+    console.error('❌ Error conectando a SQL Server:', error.message);
+    console.error('💡 Verifica que SQL Server esté ejecutándose y las credenciales sean correctas');
     process.exit(1);
   }
+}
+
+// Función para obtener el pool de conexiones
+async function getPool() {
+  if (!poolPromise) {
+    poolPromise = initializeDatabase();
+  }
+  return poolPromise;
 }
 
 // Middleware para verificar JWT
@@ -76,13 +99,14 @@ app.post('/api/register', async (req, res) => {
       return res.status(400).json({ error: 'La contraseña debe tener al menos 6 caracteres' });
     }
 
-    // Verificar si el usuario ya existe
-    const [existing] = await pool.execute(
-      'SELECT id FROM users WHERE email = ?',
-      [email]
-    );
+    const pool = await getPool();
 
-    if (existing.length > 0) {
+    // Verificar si el usuario ya existe
+    const existingUser = await pool.request()
+      .input('email', sql.NVarChar, email)
+      .query('SELECT id FROM users WHERE email = @email');
+
+    if (existingUser.recordset.length > 0) {
       return res.status(400).json({ error: 'Ya existe una cuenta con este email' });
     }
 
@@ -90,28 +114,35 @@ app.post('/api/register', async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Insertar nuevo usuario
-    const [result] = await pool.execute(
-      'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-      [name, email, hashedPassword]
-    );
+    const result = await pool.request()
+      .input('name', sql.NVarChar, name)
+      .input('email', sql.NVarChar, email)
+      .input('password', sql.NVarChar, hashedPassword)
+      .query(`
+                INSERT INTO users (name, email, password, last_login) 
+                OUTPUT INSERTED.id, INSERTED.name, INSERTED.email, INSERTED.created_at, INSERTED.last_login
+                VALUES (@name, @email, @password, GETDATE())
+            `);
+
+    const newUser = result.recordset[0];
 
     // Generar JWT
     const token = jwt.sign(
-      { id: result.insertId, email: email },
+      { id: newUser.id, email: newUser.email },
       JWT_SECRET,
       { expiresIn: '24h' }
-    );
-
-    // Obtener datos del usuario
-    const [userData] = await pool.execute(
-      'SELECT id, name, email, created_at, last_login FROM users WHERE id = ?',
-      [result.insertId]
     );
 
     res.status(201).json({
       message: '¡Cuenta creada exitosamente!',
       token: token,
-      user: userData[0]
+      user: {
+        id: newUser.id,
+        name: newUser.name,
+        email: newUser.email,
+        created_at: newUser.created_at,
+        last_login: newUser.last_login
+      }
     });
 
   } catch (error) {
@@ -129,17 +160,18 @@ app.post('/api/login', async (req, res) => {
       return res.status(400).json({ error: 'Email y contraseña son requeridos' });
     }
 
-    // Buscar usuario
-    const [users] = await pool.execute(
-      'SELECT * FROM users WHERE email = ? AND is_active = TRUE',
-      [email]
-    );
+    const pool = await getPool();
 
-    if (users.length === 0) {
+    // Buscar usuario
+    const result = await pool.request()
+      .input('email', sql.NVarChar, email)
+      .query('SELECT * FROM users WHERE email = @email AND is_active = 1');
+
+    if (result.recordset.length === 0) {
       return res.status(401).json({ error: 'Email o contraseña incorrectos' });
     }
 
-    const user = users[0];
+    const user = result.recordset[0];
 
     // Verificar contraseña
     const isValidPassword = await bcrypt.compare(password, user.password);
@@ -149,10 +181,9 @@ app.post('/api/login', async (req, res) => {
     }
 
     // Actualizar último login
-    await pool.execute(
-      'UPDATE users SET last_login = NOW() WHERE id = ?',
-      [user.id]
-    );
+    await pool.request()
+      .input('userId', sql.Int, user.id)
+      .query('UPDATE users SET last_login = GETDATE() WHERE id = @userId');
 
     // Generar JWT
     const token = jwt.sign(
@@ -163,6 +194,7 @@ app.post('/api/login', async (req, res) => {
 
     // Respuesta sin contraseña
     const { password: _, ...userResponse } = user;
+    userResponse.last_login = new Date(); // Actualizar con la nueva fecha
 
     res.json({
       message: '¡Inicio de sesión exitoso!',
@@ -179,16 +211,17 @@ app.post('/api/login', async (req, res) => {
 // Ruta para obtener perfil del usuario
 app.get('/api/profile', authenticateToken, async (req, res) => {
   try {
-    const [users] = await pool.execute(
-      'SELECT id, name, email, created_at, last_login FROM users WHERE id = ?',
-      [req.user.id]
-    );
+    const pool = await getPool();
 
-    if (users.length === 0) {
+    const result = await pool.request()
+      .input('userId', sql.Int, req.user.id)
+      .query('SELECT id, name, email, created_at, last_login FROM users WHERE id = @userId');
+
+    if (result.recordset.length === 0) {
       return res.status(404).json({ error: 'Usuario no encontrado' });
     }
 
-    res.json({ user: users[0] });
+    res.json({ user: result.recordset[0] });
 
   } catch (error) {
     console.error('Error obteniendo perfil:', error);
@@ -199,11 +232,17 @@ app.get('/api/profile', authenticateToken, async (req, res) => {
 // Ruta para obtener todos los usuarios (protegida)
 app.get('/api/users', authenticateToken, async (req, res) => {
   try {
-    const [users] = await pool.execute(
-      'SELECT id, name, email, created_at, last_login FROM users WHERE is_active = TRUE ORDER BY created_at DESC'
-    );
+    const pool = await getPool();
 
-    res.json({ users });
+    const result = await pool.request()
+      .query(`
+                SELECT id, name, email, created_at, last_login 
+                FROM users 
+                WHERE is_active = 1 
+                ORDER BY created_at DESC
+            `);
+
+    res.json({ users: result.recordset });
 
   } catch (error) {
     console.error('Error obteniendo usuarios:', error);
@@ -217,6 +256,25 @@ app.post('/api/logout', authenticateToken, async (req, res) => {
   res.json({ message: 'Sesión cerrada correctamente' });
 });
 
+// Ruta para verificar la salud de la API
+app.get('/api/health', async (req, res) => {
+  try {
+    const pool = await getPool();
+    await pool.request().query('SELECT 1 as test');
+    res.json({
+      status: 'OK',
+      database: 'Connected',
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'Error',
+      database: 'Disconnected',
+      error: error.message
+    });
+  }
+});
+
 // Servir archivos estáticos
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'Acceder.html'));
@@ -228,13 +286,31 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Error interno del servidor' });
 });
 
+// Manejo del cierre graceful
+process.on('SIGTERM', async () => {
+  console.log('🔄 Cerrando conexiones...');
+  if (poolPromise) {
+    await (await poolPromise).close();
+  }
+  process.exit(0);
+});
+
+process.on('SIGINT', async () => {
+  console.log('🔄 Cerrando conexiones...');
+  if (poolPromise) {
+    await (await poolPromise).close();
+  }
+  process.exit(0);
+});
+
 // Iniciar servidor
 async function startServer() {
-  await testConnection();
+  await initializeDatabase();
 
   app.listen(PORT, () => {
     console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
     console.log('📁 Archivos estáticos servidos desde ./public');
+    console.log('🔗 Endpoint de salud: http://localhost:' + PORT + '/api/health');
   });
 }
 
